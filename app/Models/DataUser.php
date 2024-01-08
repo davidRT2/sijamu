@@ -14,4 +14,8 @@ class DataUser extends Model
     public function akunUser(){
         return $this->hasOne(AkunUser::class, 'nomor_registrasi');
     }
+
+    public function userDosen(){
+        return $this->belongsTo(DataJurusan::class);
+    }
 }

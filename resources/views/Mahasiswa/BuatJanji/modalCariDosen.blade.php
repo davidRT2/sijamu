@@ -21,17 +21,19 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach($data as $item)
                 <tr>
-                  <td>1</td>
-                  <td>Setan</td>
-                  <td>53275531</td>
-                  <td>setan@mail.cion</td>
-                  <td>0213123213</td>
-                  <td>Gambar bkp</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->nomor_registrasi }}</td>
+                  <td>{{ $item->email }}</td>
+                  <td>{{ $item->nomor_telepon }}</td>
+                  <td>{{ $item->nama_jurusan }}</td>
                   <td>
-                    <button type="button" class="btn btn-success btn-sm" >Pilih Dosen</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="pilihDosen('{{ $item->nama }}', '{{ $item->nomor_registrasi }}')" >Pilih Dosen</button>
                 </td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -43,3 +45,11 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function pilihDosen(nama, NIP){
+      document.getElementById('nama').value = nama;
+      document.getElementById('NIP').value = NIP;
+      $('#modalCariDosen').modal('hide'); 
+    }
+  </script>

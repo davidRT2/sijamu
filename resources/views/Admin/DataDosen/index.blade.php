@@ -38,18 +38,20 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($dataDosen as $index => $dosen)
                     <tr>
-                      <td>1</td>
-                      <td>Setan</td>
-                      <td>53275531</td>
-                      <td>setan@mail.cion</td>
-                      <td>0213123213</td>
-                      <td>Gambar bkp</td>
+                      <td>{{ $index + 1 }}</td>
+                      <td>{{ $dosen->nama }}</td>
+                      <td>{{ $dosen->nomor_registrasi }}</td>
+                      <td>{{ $dosen->email }}</td>
+                      <td>{{ $dosen->nomor_telepon }}</td>
+                      <td>{{ $dosen->nama_jurusan }}</td>
                       <td>
-                        <a href="/admin/upsert-dosen" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('edit.dosen', ['id' => $dosen->nomor_registrasi]) }}" class="btn btn-warning btn-sm">Edit</a>
                         <a href="/admin/upsert-dosen" class="btn btn-danger btn-sm" >Delete</a>
                     </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

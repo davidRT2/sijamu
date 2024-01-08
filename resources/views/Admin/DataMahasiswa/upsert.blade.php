@@ -16,40 +16,41 @@
 
             {{-- /////////// Form ////////// --}}
 
-            <form class="forms-sample">
+            <form class="forms-sample" method="post" action="{{ route('mhs.submit') }}">
+              @csrf
                 <div class="form-group">
                   <label for="exampleInputUsername1">NIM</label>
-                  <input type="text" class="form-control" id="exampleInputNIM1" placeholder="NIM">
+                  <input name="no-reg" type="text" class="form-control" id="exampleInputNIP1" placeholder="NIM">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputNama1">Nama</label>
-                  <input type="text" class="form-control" id="exampleInputNama1" placeholder="Nama">
+                  <input type="text" name="nama" class="form-control" id="exampleInputNama1" placeholder="Nama">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputStatus1">Status</label>
                   <select name="status" id="status" class="form-control">
                     <option value="#" disabled selected>-- Pilih --</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Dosen</option>
-                    <option value="3">Mahasiswa</option>
+                    <option value="admin">Admin</option>
+                    <option value="dosen">Dosen</option>
+                    <option value="mahasiswa">Mahasiswa</option>
                   </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputUsername1">Jurusan</label>
                     <select name="jurusan" id="jurusan" class="form-control">
-                        <option value="#" disabled selected>-- Pilih --</option>
-                        <option value="#">IlKom</option>
-                        <option value="#">RPL</option>
-                        <option value="#">SisKom</option>
+                    <option value="#" disabled selected>-- Pilih --</option>
+                        @foreach($dataJurusan as $jurusan)
+                            <option value="{{ $jurusan->kode_jurusan }}">{{ $jurusan->nama_jurusan }}</option>
+                        @endforeach
                       </select>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputUsername1">Email</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <input name="email" type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputUsername1">No Telp</label>
-                    <input type="text" class="form-control" id="exampleInputNo Telp1" placeholder="No Telp">
+                    <input name="no_telp" type="text" class="form-control" id="exampleInputNo Telp1" placeholder="No Telp">
                   </div>
                 <button type="submit" class="btn btn-primary me-2">Submit</button>
                 <a class="btn btn-light" href="/admin/data-dosen">Cancel</a>

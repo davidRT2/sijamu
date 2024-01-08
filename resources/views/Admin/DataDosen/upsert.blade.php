@@ -16,7 +16,8 @@
 
             {{-- /////////// Form ////////// --}}
 
-            <form class="forms-sample">
+            <form class="forms-sample" method="post" action="{{ route('form.submit') }}">
+              @csrf
                 <div class="form-group">
                   <label for="exampleInputUsername1">NIP</label>
                   <input name="no-reg" type="text" class="form-control" id="exampleInputNIP1" placeholder="NIP">
@@ -37,10 +38,9 @@
                 <div class="form-group">
                     <label for="exampleInputUsername1">Jurusan</label>
                     <select name="jurusan" id="jurusan" class="form-control">
-                        <option value="#" disabled selected>-- Pilih --</option>
-                        <option value="#">IlKom</option>
-                        <option value="#">RPL</option>
-                        <option value="#">SisKom</option>
+                        @foreach($dataJurusan as $jurusan)
+                            <option value="{{ $jurusan->kode_jurusan }}">{{ $jurusan->nama_jurusan }}</option>
+                        @endforeach
                       </select>
                   </div>
                   <div class="form-group">

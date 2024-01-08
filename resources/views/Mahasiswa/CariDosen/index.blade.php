@@ -8,7 +8,7 @@
             {{-- /////////// Header ////////// --}}
             <div class="row">
                 <div class="col-sm-9">
-                    <h3>Daftar Janji</h3>
+                    <h3>Daftar Dosen</h3>
                 </div>
                 <div class="col-sm-3">
                   <div class="row g-3">

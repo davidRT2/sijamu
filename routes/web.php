@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DosenController;
+use App\Models\MahasiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,27 +26,26 @@ Route::get('/login', function () {
 });
 
 /////////////////////// Admin Route
-Route::get('/admin/data-mahasiswa', function () {
-    return view('Admin.DataMahasiswa.index');
-})->name('admin/upsert-mahasiswa');
-Route::get('/admin/upsert-mahasiswa', function () {
-    return view('Admin.DataMahasiswa.upsert');
-});
-// Route::resource('/admin/mahasiswa', 'Admin.DataMahasiswa.index');
+Route::get('/admin/data-mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+Route::get('/admin/upsert-mahasiswa', [MahasiswaController::class, 'listJurusan']);
+Route::post('/admin/insert-mahasiswa', [MahasiswaController::class, 'store'])->name('mhs.submit');
+Route::get('/admin/edit-mahasiswa/{id}', [MahasiswaController::class, 'editMahasiswa'])->name('edit.mahasiswa');
 
-
-Route::get('/admin/data-dosen', function () {
-    return view('Admin.DataDosen.index');
-});
-Route::get('/admin/upsert-dosen', function () {
-    return view('Admin.DataDosen.upsert');
-});
+/* 
+  Batas Controller Mahasiswa
+*/
+Route::get('/admin/data-dosen', [DosenController::class, 'index'])->name('dosen.index');
+Route::get('/admin/upsert-dosen', [DosenController::class, 'listJurusan'])->name('upsert-dosen');
+Route::get('/admin/edit-dosen/{id}', [DosenController::class, 'editDosen'])->name('edit.dosen');
+Route::post('/admin/update-dosen/{id}', [DosenController::class, 'update'])->name('update.dosen');
 /////////////////////// End Admin Route
 
 /////////////////////// Mahasiswa Route ////////////
-Route::get('/mahasiswa/buatjanji', function () {
-    return view('Mahasiswa.BuatJanji.index');
-});
+// Route::get('/mahasiswa/buatjanji', function () {
+//     return view('Mahasiswa.BuatJanji.index');
+// });
+
+Route::get('/mahasiswa/buatjanji', [MahasiswaController::class, 'promiseIndex'])->name('createJanji.promis');
 Route::get('/mahasiswa/janji-berhasil', function () {
     return view('Mahasiswa.BuatJanji.berhasil');
 });
@@ -60,4 +61,6 @@ Route::get('/mahasiswa/caridosen', function () {
 Route::get('/dosen/tanggapan', function () {
     return view('Dosen.index');
 });
+
+Route::post('/form-submit', [DosenController::class, 'store'])->name('form.submit');
 /////////////////////// Dosen Route ////////////
