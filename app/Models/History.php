@@ -12,7 +12,7 @@ class History extends Model
     protected $fillable = ['kode_janji', 'nip_dosen', 'nim_mahasiswa', 'status'];
 
     public function janji() {
-        return $this->hasOne(JanjiTemu::class, 'kode_janji');
+    return $this->hasOne(JanjiTemu::class, 'kode_janji');
     }
 
 }

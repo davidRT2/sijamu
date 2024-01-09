@@ -12,7 +12,7 @@
             <p>Nama :</p>
           </div>
           <div class="col-sm-9">
-            <p>David</p>
+            <p id="modalNama"></p>
           </div>
         </div>
         <div class="row">
@@ -20,7 +20,7 @@
             <p>Tanggal Janji :</p>
           </div>
           <div class="col-sm-9">
-            <p>09.00 | 11-11-2023 | Ruang AD Lama</p>
+            <p id="modalTanggal"></p>
           </div>
         </div>
         <div class="row">
@@ -28,7 +28,7 @@
             <p>Topik :</p>
           </div>
           <div class="col-sm-9">
-            <p>Ingin membahas persoalan tentang TA</p>
+            <p id="modalTopik"></p>
           </div>
         </div>
         {{-- //////////////////////// End Content ////////////////////////// --}}
@@ -41,3 +41,27 @@
     </div>
   </div>
 </div>
+
+<script>
+  function openModal(button) {
+    // Access the JSON-encoded data from the data-janji attribute
+    var janjiData = JSON.parse(button.getAttribute('data-janji'))
+    var datetime = new Date(janjiData.tanggal);
+    var formattedDate = datetime.toLocaleString('id-ID', {
+      day: 'numeric',
+      month: 'long', // or 'short' for abbreviated names
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false
+    });
+    // Update modal content with the corresponding row data
+    $('#modalTanggapanLabel').text(janjiData.nama_mahasiswa);
+    $('#modalNama').text(janjiData.nama_mahasiswa);
+    $('#modalTanggal').text(formattedDate + ' | ' + janjiData.tempat);
+    $('#modalTopik').text(janjiData.keperluan);
+
+    // Show the modal
+    $('#modalTanggapan').modal('show');
+  }
+</script>

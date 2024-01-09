@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\JanjiController;
+use App\Http\Controllers\ResponJanjiController;
 use App\Models\MahasiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +34,9 @@ Route::post('/admin/insert-mahasiswa', [MahasiswaController::class, 'store'])->n
 Route::get('/admin/edit-mahasiswa/{id}', [MahasiswaController::class, 'editMahasiswa'])->name('edit.mahasiswa');
 
 /* 
-  Batas Controller Mahasiswa
+Batas Controller Mahasiswa
 */
+Route::post('/form-submit', [DosenController::class, 'store'])->name('form.submit');
 Route::get('/admin/data-dosen', [DosenController::class, 'index'])->name('dosen.index');
 Route::get('/admin/upsert-dosen', [DosenController::class, 'listJurusan'])->name('upsert-dosen');
 Route::get('/admin/edit-dosen/{id}', [DosenController::class, 'editDosen'])->name('edit.dosen');
@@ -57,9 +59,5 @@ Route::get('/mahasiswa/caridosen', function () {
 /////////////////////// End Mahasiswa Route ////////////
 
 /////////////////////// Dosen Route ////////////
-Route::get('/dosen/tanggapan', function () {
-    return view('Dosen.index');
-});
-
-Route::post('/form-submit', [DosenController::class, 'store'])->name('form.submit');
+Route::get('/dosen/tanggapan', [ResponJanjiController::class, 'index'])->name('dosen.index');
 /////////////////////// Dosen Route ////////////
