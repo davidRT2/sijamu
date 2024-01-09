@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\JanjiController;
 use App\Models\MahasiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,20 +42,18 @@ Route::post('/admin/update-dosen/{id}', [DosenController::class, 'update'])->nam
 /////////////////////// End Admin Route
 
 /////////////////////// Mahasiswa Route ////////////
-// Route::get('/mahasiswa/buatjanji', function () {
-//     return view('Mahasiswa.BuatJanji.index');
-// });
 
 Route::get('/mahasiswa/buatjanji', [MahasiswaController::class, 'promiseIndex'])->name('createJanji.promis');
+Route::get('/mahasiswa/cari-dosen', [MahasiswaController::class, 'cariDosen']);
 Route::get('/mahasiswa/janji-berhasil', function () {
     return view('Mahasiswa.BuatJanji.berhasil');
 });
-Route::get('/mahasiswa/riwayat', function () {
-    return view('Mahasiswa.Riwayat.index');
-});
+Route::post('/mahasiswa/create-janji', [JanjiController::class, 'store'])->name('store.janji');
+Route::get('/mahasiswa/riwayat', [JanjiController::class, 'index'])->name('index.janji');
 Route::get('/mahasiswa/caridosen', function () {
     return view('Mahasiswa.CariDosen.index');
 });
+
 /////////////////////// End Mahasiswa Route ////////////
 
 /////////////////////// Dosen Route ////////////

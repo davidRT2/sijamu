@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <a href="/mahasiswa/buatjanji" class="btn btn-success">Kembali</a>
+            <a href="/mahasiswa/riwayat" class="btn btn-success">Kembali</a>
             {{-- /////////////////////// End Form ///////////////////// --}}
 
         </div>

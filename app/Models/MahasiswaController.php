@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,8 @@ class MahasiswaController extends Model
 {
     use HasFactory;
 
-    public function index(){
+    public function index()
+    {
         $dataMahasiswa = DataUser::join('data_jurusan', 'data_user.kode_jurusan', '=', 'data_jurusan.kode_jurusan')
             ->select('data_user.*', 'data_jurusan.nama_jurusan')
             ->where('data_user.role', '=', 'mahasiswa')
@@ -20,13 +22,15 @@ class MahasiswaController extends Model
         return view('Admin.DataMahasiswa.index', compact('dataMahasiswa'));
     }
 
-    public function listJurusan(){
+    public function listJurusan()
+    {
         $dataJurusan = DataJurusan::all();
 
         return view('Admin.DataMahasiswa.upsert', compact('dataJurusan'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'no-reg' => 'required',
             'nama' => 'required',
@@ -49,7 +53,8 @@ class MahasiswaController extends Model
         return redirect('/admin/data-mahasiswa')->with('success', 'Data Mahasiswa berhasil disimpan.');
     }
 
-    public function editMahasiswa($id){
+    public function editMahasiswa($id)
+    {
         $dataMahasiswa = DataUser::where('nomor_registrasi', $id)->first();
         $daftarJurusan = DataJurusan::all();
 
@@ -57,11 +62,27 @@ class MahasiswaController extends Model
         // return view('Admin.DataDosen.update');
     }
 
-    public function promiseIndex(){
+    public function promiseIndex()
+    {
         $data = DataUser::join('data_jurusan', 'data_user.kode_jurusan', '=', 'data_jurusan.kode_jurusan')
-        ->select('data_user.*', 'data_jurusan.nama_jurusan')
-        ->where('data_user.role', '=', 'dosen')
-        ->get();
+            ->select('data_user.*', 'data_jurusan.nama_jurusan')
+            ->where('data_user.role', '=', 'dosen')
+            ->get();
         return view('Mahasiswa.BuatJanji.index', compact('data'));
     }
+
+    public function cariDosen(Request $request)
+    {
+        $query = $request->input('query');
+    
+        // Lakukan pencarian dosen berdasarkan nama dengan inner join ke DataJurusan
+        $results = DataUser::join('data_jurusan', 'data_user.kode_jurusan', '=', 'data_jurusan.kode_jurusan')
+            ->select('data_user.*', 'data_jurusan.nama_jurusan')
+            ->where('data_user.nama', 'like', '%' . $query . '%')
+            ->where('data_user.role', 'dosen')
+            ->get();
+    
+        return response()->json($results);
+    }
+    
 }

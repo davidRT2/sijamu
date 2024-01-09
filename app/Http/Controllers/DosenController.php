@@ -37,7 +37,6 @@ class DosenController extends Controller
         $request->validate([
             'no-reg' => 'required',
             'nama' => 'required',
-            'status' => 'required',
             'jurusan' => 'required',
             'email' => 'required|email',
             'no_telp' => 'required',
@@ -46,7 +45,7 @@ class DosenController extends Controller
         $dataUser = new DataUser();
         $dataUser->nomor_registrasi = $request->input('no-reg');
         $dataUser->nama = $request->input('nama');
-        $dataUser->role = $request->input('status');
+        $dataUser->role = "Dosen";
         $dataUser->kode_jurusan = $request->input('jurusan');
         $dataUser->email = $request->input('email');
         $dataUser->jabatan = "Dosen";
