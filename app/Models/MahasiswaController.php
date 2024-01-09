@@ -46,7 +46,6 @@ class MahasiswaController extends Model
         $dataUser->role = $request->input('status');
         $dataUser->kode_jurusan = $request->input('jurusan');
         $dataUser->email = $request->input('email');
-        $dataUser->jabatan = "mahasiswa";
         $dataUser->nomor_telepon = $request->input('no_telp');
         $dataUser->save();
 
@@ -84,5 +83,37 @@ class MahasiswaController extends Model
     
         return response()->json($results);
     }
+
+    public function updateMahasiswa(Request $request, $id){
+        $request->validate([
+            'no-reg' => 'required',
+            'nama' => 'required',
+            'status' => 'required',
+            'jurusan' => 'required',
+            'email' => 'required|email',
+            'no_telp' => 'required',
+        ]);
+        $dataUser = new DataUser();
+        $dataUser = DataUser::where('nomor_registrasi', $id)->first();
+        $dataUser->nama = $request->input('nama');
+        $dataUser->role = $request->input('status');
+        $dataUser->kode_jurusan = $request->input('jurusan');
+        $dataUser->email = $request->input('email');
+        $dataUser->nomor_telepon = $request->input('no_telp');
+        $dataUser->save();
+
+        // return redirect()->route('dosen.index')->with('success', 'Data Dosen berhasil diperbarui.');
+        return redirect()->route('mahasiswaAdmin.index')->with('success', 'Data Mahasiswa berhasil diperbarui.');
+    }
     
+    public function deleteMahasiswa($id)
+    {
+        $dosen = DataUser::where('nomor_registrasi', $id)->first();
+        if(!$dosen){
+            return redirect()->route('dosenMahasiswa.index')->with('error', 'Data Dosen tidak ada');
+        }
+        $dosen->delete();
+
+        return redirect()->route('mahasiswaAdmin.index')->with('succes', 'Data Dosen berhasil dihapus');
+    }
 }

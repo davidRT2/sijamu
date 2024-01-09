@@ -45,10 +45,9 @@ class DosenController extends Controller
         $dataUser = new DataUser();
         $dataUser->nomor_registrasi = $request->input('no-reg');
         $dataUser->nama = $request->input('nama');
-        $dataUser->role = "Dosen";
+        $dataUser->role = $request->input('status');
         $dataUser->kode_jurusan = $request->input('jurusan');
         $dataUser->email = $request->input('email');
-        $dataUser->jabatan = "Dosen";
         $dataUser->nomor_telepon = $request->input('no_telp');
         $dataUser->save();
 
@@ -70,11 +69,20 @@ class DosenController extends Controller
         $dataUser->role = $request->input('status');
         $dataUser->kode_jurusan = $request->input('jurusan');
         $dataUser->email = $request->input('email');
-        $dataUser->jabatan = "Dosen";
         $dataUser->nomor_telepon = $request->input('no_telp');
         $dataUser->save();
 
         // return redirect()->route('dosen.index')->with('success', 'Data Dosen berhasil diperbarui.');
-        return redirect('/admin/data-dosen')->with('success', 'Data Dosen berhasil disimpan.');
+        return redirect()->route('dosenAdmin.index')->with('success', 'Data Dosen berhasil disimpan.');
+    }
+
+    public function delete($id){
+        $dosen = DataUser::where('nomor_registrasi', $id)->first();
+        if(!$dosen){
+            return redirect()->route('doseAdmin.index')->with('error', 'Data Dosen tidak ada');
+        }
+        $dosen->delete();
+
+        return redirect()->route('dosenAdmin.index')->with('succes', 'Data Dosen berhasil dihapus');
     }
 }

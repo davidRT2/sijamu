@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataUser;
 use App\Models\History;
 use App\Models\JanjiTemu;
 use Illuminate\Http\Request;
@@ -51,6 +52,17 @@ class JanjiController extends Controller
 
         // Redirect ke halaman lain atau tampilkan pesan sukses
         return redirect('/mahasiswa/janji-berhasil')->with('success', 'Janji berhasil dibuat!');
+    }
+
+    public function daftarDosen()
+    {
+        $dataDosen = DataUser::join('data_jurusan', 'data_user.kode_jurusan', '=', 'data_jurusan.kode_jurusan')
+            ->select('data_user.*', 'data_jurusan.nama_jurusan')
+            ->where('data_user.role', '=', 'dosen')
+            ->get();
+
+        // Mengirim data ke view
+        return view('Mahasiswa.CariDosen.index', compact('dataDosen'));
     }
     /* 
     Fungsi umum

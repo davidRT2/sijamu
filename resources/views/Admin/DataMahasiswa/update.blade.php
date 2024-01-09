@@ -16,23 +16,22 @@
 
             {{-- /////////// Form ////////// --}}
 
-            <form class="forms-sample" method="post" action="{{ route('form.submit') }}">
+            <form class="forms-sample" method="post" action="{{ route('update.mahasiswa', ['id' => $dataMahasiswa->nomor_registrasi]) }}">
                 @csrf
                 <div class="form-group">
-                    <label for="exampleInputUsername1">NIM</label>
-                    <input name="no-reg" type="text" class="form-control" id="exampleInputNIP1" placeholder="NIP" value="{{ $dataMahasiswa->nomor_registrasi }}">
+                    <label for="exampleInputUsername1">NIP</label>
+                    <input name="no-reg" type="text" class="form-control" id="exampleInputNIP1" placeholder="NIP" value="{{ $dataMahasiswa->nomor_registrasi }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputNama1">Nama</label>
                     <input type="text" name="nama" class="form-control" id="exampleInputNama1" placeholder="Nama" value="{{ $dataMahasiswa->nama }}">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputStatus1">Status</label>
+                    <label for="exampleInputStatus1">Role</label>
                     <select name="status" id="status" class="form-control">
-                        <option value="#" disabled selected>-- Pilih --</option>
-                        <option value="admin">Admin</option>
-                        <option value="dosen">Dosen</option>
-                        <option value="mahasiswa">Mahasiswa</option>
+                        <option value="#" disabled>-- Pilih --</option>
+                        <option value="admin" @if($dataMahasiswa->role=='admin' ) selected @endif>Admin</option>
+                        <option value="mahasiswa" @if($dataMahasiswa->role=='mahasiswa' ) selected @endif>Mahasiswa</option>
                     </select>
                 </div>
                 <div class="form-group">

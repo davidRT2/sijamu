@@ -48,9 +48,9 @@
               <td>
                 @if($janji->status == 'diterima')
                 <span class="badge bg-success">Diterima</span>
-                @elseif($janji->status == 'reschedule')
-                <a type="button" class="btn btn-warning">
-                  <span class="badge bg-warning text-dark">Reschedule</span>
+                @elseif($janji->status == 'rescheduled')
+                <a type="button" class="btn btn-sm btn-warning">
+                  Reschedule
                 </a>
                 @elseif($janji->status == 'ditolak')
                 <span class="badge bg-danger">Ditolak</span>

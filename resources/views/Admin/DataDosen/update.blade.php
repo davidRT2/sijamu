@@ -20,18 +20,18 @@
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputUsername1">NIP</label>
-                    <input name="no-reg" type="text" class="form-control" id="exampleInputNIP1" placeholder="NIP" value="{{ $dataDosen->nomor_registrasi }}">
+                    <input name="no-reg" type="text" class="form-control" id="exampleInputNIP1" placeholder="NIP" value="{{ $dataDosen->nomor_registrasi }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputNama1">Nama</label>
                     <input type="text" name="nama" class="form-control" id="exampleInputNama1" placeholder="Nama" value="{{ $dataDosen->nama }}">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputStatus1">Status</label>
+                    <label for="exampleInputStatus1">Role</label>
                     <select name="status" id="status" class="form-control">
-                        <option value="#" disabled selected>-- Pilih --</option>
-                        <option value="admin">Admin</option>
-                        <option value="dosen">Dosen</option>
+                        <option value="#" disabled>-- Pilih --</option>
+                        <option value="admin" @if($dataDosen->role=='admin' ) selected @endif>Admin</option>
+                        <option value="dosen" @if($dataDosen->role=='dosen' ) selected @endif>Dosen</option>
                         <option value="mahasiswa">Mahasiswa</option>
                     </select>
                 </div>

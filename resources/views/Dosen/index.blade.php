@@ -12,8 +12,8 @@
         </div>
         <div class="col-sm-3">
           <div class="row g-3">
-            <div class="col-auto">
-              <input type="password" class="form-control" id="inputPassword2" placeholder="Nama Dosen">
+            <div class="col-sm 9">
+              <input type="text" class="form-control" id="inputPassword2" placeholder="Nama Dosen">
             </div>
             <div class="col-auto">
               <button type="submit" class="btn btn-primary mb-3 btn-sm">Cari</button>
@@ -48,7 +48,12 @@
               <td>{{ $janji->tanggal }}</td>
               <td>{{ $janji->keperluan }}</td>
               <td>
+                @if(isset($janji))
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalTanggapan" data-janji="{{ json_encode($janji) }}" onclick="openModal(this)">Lihat</button>
+                @else
+                <!-- Handle the case when $janji is not defined, you can show a disabled button or handle it according to your needs -->
+                <button type="button" class="btn btn-success" disabled>Lihat</button>
+                @endif
               </td>
             </tr>
             @endforeach
@@ -59,6 +64,7 @@
 
       {{-- /////////// Modal ////////// --}}
       @include('Dosen.modalTanggapan')
+      @include('Dosen.modalEdit')
       {{-- /////////// End Modal ////////// --}}
 
       {{-- /////////////////////// End Content ///////////////////// --}}

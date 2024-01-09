@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="row g-3">
-                        <div class="col-auto">
-                            <input type="password" class="form-control" id="inputPassword2" placeholder="Nama Dosen">
+                        <div class="col-sm 9">
+                            <input type="text" class="form-control" id="inputPassword2" placeholder="Nama Dosen">
                           </div>
                           <div class="col-auto">
                             <button type="submit" class="btn btn-primary mb-3 btn-sm">Cari</button>
@@ -48,7 +48,7 @@
                       <td>{{ $dosen->nama_jurusan }}</td>
                       <td>
                         <a href="{{ route('edit.dosen', ['id' => $dosen->nomor_registrasi]) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="/admin/upsert-dosen" class="btn btn-danger btn-sm" >Delete</a>
+                        <a href="{{ route('delete.dosen', ['id' => $dosen->nomor_registrasi]) }}" class="btn btn-danger btn-sm" >Delete</a>
                     </td>
                     </tr>
                     @endforeach
